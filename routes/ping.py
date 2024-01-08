@@ -1,7 +1,5 @@
-from flask_restful import Resource
-
 url = "/ping"
 
 # class Ping(Resource):
-def get(self):
+def get():
     return "ping :)"
