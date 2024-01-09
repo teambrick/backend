@@ -1,1 +1,1 @@
-this is the glue, the database stuff, and maybe will compute reccomendations too.
+this is the glue, the database stuff, and maybe will compute recommendations too.
