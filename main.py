@@ -1,6 +1,7 @@
 from pathlib import Path
 import importlib.util
 import flask
+from flask import g
 
 app = flask.Flask(__name__)
 
@@ -33,6 +34,12 @@ def cursed_importing():
 def main():
   cursed_importing()
   app.run(debug=True, host="0.0.0.0")
+
+@app.teardown_appcontext
+def close_connection(_exception):
+    db = getattr(g, '_db', None)
+    if db is not None:
+        db.close()
 
 if __name__ == "__main__":
     main()
