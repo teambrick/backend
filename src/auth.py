@@ -5,5 +5,5 @@ def user_auth():
     if request.authorization is None:
         return 401
     if not auth:
-        bleugh
+        bleurgh
     pass
