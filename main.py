@@ -4,6 +4,8 @@ import flask
 
 app = flask.Flask(__name__)
 
+valid_tokens = {}
+
 # do not ask, i will not be able to answer
 # this is my beautiful child and i love it
 def import_path(path: Path):
@@ -16,16 +18,14 @@ def import_path(path: Path):
 
 methods = ["get", "post", "put"]
 
+# this is the beautiful twin
 def cursed_importing():
     result = list(Path("routes/").rglob("*.py"))
-    # print(result)
     for k in result:
         mod = import_path(k)
         if "url" not in mod.__dict__.keys(): continue
         mnice = {k:v for k, v in mod.__dict__.items() if k in methods}
         print(mnice)
-        # print("handling " + mod.url)
-        # blank_class = type(mod.url, (flask_restful.Resource,), mnice)
         for k,v in mnice.items():
           print(f"{k.upper()} {mod.url}")
           app.add_url_rule(mod.url, endpoint=mod.url, methods=[k.upper()], view_func=v)

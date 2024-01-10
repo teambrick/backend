@@ -23,7 +23,8 @@ CREATE TABLE Users (
 
     HouseholdID integer NOT NULL,
 
-    Name varchar(256) NOT NULL,
+    UserName varchar(256) NOT NULL,
+    Password varchar(256) NOT NULL,
     PRIMARY KEY (UserID)
     FOREIGN KEY (HouseholdID) REFERENCES Households(HouseholdID)
 );
