@@ -1,5 +1,5 @@
 from flask.json import jsonify
-from utils.responses import not_found
+from utils.responses import error, success
 from utils import db
 from flask import Response
 
@@ -10,6 +10,10 @@ def get(recipe_id):
     cursor = db.connect().cursor()
     cursor.execute(f"SELECT * FROM Recipes WHERE RecipeID={recipe_id}")
     res = cursor.fetchone()
-    if res is None: return not_found()
+    if res is None: return error(404)
     (_index, name, desc, method) = res
-    return (jsonify(name=name, desc=desc, method=method), 200)
+    return success({
+        "name": name,
+        "description": desc,
+        "method": method
+    })

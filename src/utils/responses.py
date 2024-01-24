@@ -1,4 +1,15 @@
 from flask import Response
+import json
+from http import HTTPStatus
+
+headers = {
+    "Access-Control-Allow-Credentials": "true",
+    "Access-Control-Allow-Origin": "*",
+    "Access-Control-Allow-Methods": "GET,HEAD,POST,OPTIONS",
+    "Access-Control-Allow-Headers": "Content-Type, token",
+    "Access-Control-Max-Age": "86400",
+    "Content-Type": "application/json"
+}
 
 def not_found():
     return Response(status=404)
