@@ -21,7 +21,7 @@ methods = ["get", "post", "put"]
 
 # this is the beautiful twin
 def cursed_importing():
-    result = list(Path("routes/").rglob("*.py"))
+    result = list(Path("src/routes/").rglob("*.py"))
     for k in result:
         mod = import_path(k)
         if "url" not in mod.__dict__.keys(): continue
