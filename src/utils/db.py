@@ -23,7 +23,7 @@ if not db_path.is_file():
     #cmd = os.system("touch ./database.db && cat src/sql/create.sql | sqlite3 database.db")
     #if not cmd == 0:
     #    raise Exception("failed to create database or initialize it")
-    # ^ THIS IS NOT NEEDED, SQLITE 3 AUTOMATICALLY CREATES A DATABASE IF ONE DOESN'T EXIST also it doesn't work on windows :)
+    # ^ THIS IS NOT NEEDED, SQLITE 3 AUTOMATICALLY CREATES A DATABASE IF ONE DOESN'T EXIST also it doesn't work on windows :) - that is a skill issue <3
 
 def connect() -> sqlite3.Connection:
     db = getattr(g, "_db", None)
