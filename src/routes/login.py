@@ -1,3 +1,6 @@
 # TODO: urlparams and more
 
-url = "/login"
+url = "auth/login"
+
+def post():
+    return

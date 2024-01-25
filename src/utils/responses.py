@@ -11,9 +11,6 @@ headers = {
     "Content-Type": "application/json"
 }
 
-def not_found():
-    return Response(status=404)
-
 def error(status, message=None):
     response = {
         "success": False, 
