@@ -1,0 +1,10 @@
+flask
+pyjwt
+bcrypt
+python-dotenv
+pandas
+spacy
+tqdm
+gensim
+rank_bm25
+nmslib

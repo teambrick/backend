@@ -8,6 +8,8 @@ bin/
 include/
 lib/
 lib64/
+_cache/
+old/
 
 *.db
 

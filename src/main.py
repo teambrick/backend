@@ -1,9 +1,13 @@
 from pathlib import Path
 import importlib.util
 import flask
-from flask import g
 
 app = flask.Flask(__name__)
+
+setattr(__builtins__, "app", app)
+
+from flask import g
+
 
 valid_tokens = {}
 
