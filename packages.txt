@@ -8,3 +8,7 @@ tqdm
 gensim
 rank_bm25
 nmslib
+pytesseract
+scikit-learn
+opencv-python
+autocorrect

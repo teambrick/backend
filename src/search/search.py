@@ -72,7 +72,7 @@ def bm25Init(tok_txt, model):
             vecs = pickle.load(file)
     return vecs
 
-def indexCreate(data, path):
+def indexCreate(data):
     # if path.exists():
         # raise Exception(str(path) + " exists but is not a regular file")
     index = nmslib.init(method="hnsw", space="cosinesimil")
@@ -83,23 +83,24 @@ def indexCreate(data, path):
 
 # TODO: figure out how to pickle-dump index
 def indexInit(data):
-    idx_path = Path("./_cache/index.p")
     # if not idx_path.is_file():
-    index = indexCreate(data, idx_path)
+    index = indexCreate(data)
     # else:
         # with open(idx_path, "rb") as file:
             # index = pickle.load(file)
     return index
 
+blacklisted_vocab = ["sweet", "juicy"]
+
 class SearchIndex():
     def __init__(self, model, index):
         self.model = model
         self.index = index
-    def search(self, text: str):
+    def search(self, text: str, blacklisted=blacklisted_vocab):
         txt = text.lower().split()
-        query = [self.model.wv[vec] for vec in txt]
+        query = [self.model.wv[vec] for vec in txt if vec not in blacklisted]
         query = np.mean(query, axis=0)
-        ids, distances = self.index.knnQuery(query, k=10)
+        ids, distances = self.index.knnQuery(query, k=1)
         return zip(ids, distances)
 
 def loadMain():

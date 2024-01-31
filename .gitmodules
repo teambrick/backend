@@ -1,0 +1,3 @@
+[submodule "imglib"]
+	path = imglib
+	url = https://github.com/teambrick/imglib
