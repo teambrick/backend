@@ -10,6 +10,7 @@ def get(recipe_id):
     res = cursor.fetchone()
     if res is None: return error(404)
     (_index, name, desc, method) = res
+    # TODO: ingredients
     return success({
         "name": name,
         "description": desc,

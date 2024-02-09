@@ -1,6 +1,10 @@
 from pathlib import Path
 import importlib.util
 import flask
+from dotenv import load_dotenv
+from flask_jwt_extended.view_decorators import jwt_required
+from flask_jwt_extended import JWTManager
+import os
 
 app = flask.Flask(__name__)
 
@@ -10,6 +14,12 @@ from flask import g
 
 
 valid_tokens = {}
+
+
+load_dotenv()
+
+app.config["JWT_SECRET_KEY"] = os.getenv("JWT_SECRET")  # Change this!
+jwt = JWTManager(app)
 
 # do not ask, i will not be able to answer
 # this is my beautiful child and i love it
@@ -33,6 +43,8 @@ def cursed_importing():
         print(mnice)
         for k,v in mnice.items():
           print(f"{k.upper()} {mod.url}")
+          # if "authed" in mod.__dict__.keys() and mod.__dict__["authed"]:
+              # v = jwt_required(v)
           app.add_url_rule(mod.url, endpoint=mod.url, methods=[k.upper()], view_func=v)
   
 def main():
