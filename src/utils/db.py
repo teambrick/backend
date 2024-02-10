@@ -28,5 +28,5 @@ if not db_path.is_file():
 def connect() -> sqlite3.Connection:
     db = getattr(g, "_db", None)
     if db is None:
-        db = g._db = sqlite3.connect(db_path)
+        db = g._db = sqlite3.connect(db_path, check_same_thread=False)
     return db

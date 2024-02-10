@@ -18,8 +18,10 @@ def post():
 
     ocr_txt = " ".join(ocr_out)
     
-    (idx, inv_conf) = list(search.sindex.search(ocr_txt))[0]
+    res = search.sindex.search(ocr_txt)
+    idx = res["id"]
+    name = res["name"]
 
     [name] = db.connect().cursor().execute(f"SELECT IngredientName FROM Ingredients WHERE IngredientID={idx}").fetchone()
 
-    return success({"idx":int(idx), "inv_conf":float(inv_conf), "detected":ocr_txt, "name":name})
+    return success({"idx":int(idx), "detected":ocr_txt, "name":name})

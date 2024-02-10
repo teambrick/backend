@@ -8,10 +8,14 @@ import numpy as np
 import pickle
 import nmslib
 
+df = None
+
 def loadFromDb() -> pd.DataFrame:
+    global df
     with __builtins__["app"].app_context():
         conn = db.connect()
-        return pd.read_sql_query("SELECT * FROM Ingredients", conn)
+        df = pd.read_sql_query("SELECT * FROM Ingredients", conn)
+        return df
 
 def fix_text(t):
     return t
@@ -96,11 +100,12 @@ class SearchIndex():
     def __init__(self, model, index):
         self.model = model
         self.index = index
-    def search(self, text: str, blacklisted=blacklisted_vocab):
+    def search(self, text: str, blacklisted=blacklisted_vocab, n=1):
         txt = text.lower().split()
         query = [self.model.wv[vec] for vec in txt if vec not in blacklisted]
         query = np.mean(query, axis=0)
-        ids, distances = self.index.knnQuery(query, k=1)
+        ids, distances = self.index.knnQuery(query, k=n)
+        ids = [df.loc[ids[0]]["IngredientID"]]
         return zip(ids, distances)
 
 def loadMain():
